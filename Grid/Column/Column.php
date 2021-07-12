@@ -526,6 +526,9 @@ abstract class Column
     public function getData()
     {
         $result = [];
+        if (empty($this->data)) {
+            return $result;
+        }
 
         $hasValue = false;
         if ($this->data['from'] != $this::DEFAULT_VALUE) {
@@ -686,6 +689,9 @@ abstract class Column
     public function getFilters($source)
     {
         $filters = [];
+        if (empty($this->data)) {
+            return $filters;
+        }
 
         if ($this->hasOperator($this->data['operator'])) {
             if ($this instanceof ArrayColumn && in_array($this->data['operator'], [self::OPERATOR_EQ, self::OPERATOR_NEQ])) {

@@ -52,7 +52,7 @@ class DataGridExtension extends Twig_Extension implements Twig_Extension_Globals
     /**
      * @var array
      */
-    protected $names;
+    protected $names = [];
 
     /**
      * @var array
@@ -240,7 +240,7 @@ class DataGridExtension extends Twig_Extension implements Twig_Extension_Globals
     {
         $value = $column->renderCell($row->getField($column->getId()), $row, $this->router);
 
-        $id = $this->names[$grid->getHash()];
+        $id = $this->names[$grid->getHash()] ?? '';
 
         if (($id != '' && ($this->hasBlock($environment, $block = 'grid_' . $id . '_column_' . $column->getRenderBlockId() . '_cell')
                     || $this->hasBlock($environment, $block = 'grid_' . $id . '_column_' . $column->getType() . '_cell')
@@ -272,7 +272,7 @@ class DataGridExtension extends Twig_Extension implements Twig_Extension_Globals
      */
     public function getGridFilter(Twig_Environment $environment, $column, $grid, $submitOnChange = true)
     {
-        $id = $this->names[$grid->getHash()];
+        $id = $this->names[$grid->getHash()] ?? '';
 
         if (($id != '' && ($this->hasBlock($environment, $block = 'grid_' . $id . '_column_' . $column->getRenderBlockId() . '_filter')
                     || $this->hasBlock($environment, $block = 'grid_' . $id . '_column_id_' . $column->getRenderBlockId() . '_filter')
